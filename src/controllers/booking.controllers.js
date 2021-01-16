@@ -28,6 +28,16 @@ exports.finById = function(req, res) {
     });
 };
 
+exports.finByUser = function(req, res) {
+    Booking.finByUser(req.params.id, function(err, bookings) {
+        console.log('controller')
+        if (err)
+            res.status(400).send(err);
+        console.log('res', bookings);
+        res.send(bookings);
+    });
+};
+
 /**
  * 
  * @param {*} req 

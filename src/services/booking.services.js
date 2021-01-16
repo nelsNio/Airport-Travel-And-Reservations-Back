@@ -26,6 +26,19 @@ exports.finById = (id, result) => {
 };
 
 
+exports.finByUser = (id, result) => {
+    dbConn.query("Select * from booking where user_iduser = ? ", id, function(err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        } else {
+            console.log('booking : ', res);
+            result(null, res);
+        }
+    });
+};
+
+
 exports.create = function(newbooking, result) {
     const new_booking = new Booking(newbooking);
 

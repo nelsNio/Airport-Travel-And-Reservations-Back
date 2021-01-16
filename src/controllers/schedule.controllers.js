@@ -28,15 +28,7 @@ exports.finById = function(req, res) {
     });
 };
 
-exports.findUsers = function(req, res) {
-    Schedule.findUsers(req.params.id, function(err, schedules) {
-        console.log('controller')
-        if (err)
-            res.status(400).send(err);
-        console.log('res', schedules);
-        res.send(schedules);
-    });
-};
+
 
 /**
  * 

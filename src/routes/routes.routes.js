@@ -8,10 +8,7 @@ const scheduleController = require('../controllers/schedule.controllers');
 const loginController = require('../controllers/login.controllers');
 var authMiddleware = require('../middleware/auth');
 
-
-
 //Auth
-
 // Define Login
 router.post('/login', loginController.login);
 
@@ -30,6 +27,7 @@ router.get('/users/:id', userController.finById);
 router.get('/bookings', bookingController.findAll);
 router.post('/bookings', [authMiddleware.checkJwt], bookingController.create);
 router.get('/bookings/:id', bookingController.finById);
+router.get('/bookings/user/:id', bookingController.finByUser);
 
 // Define API Schedule
 router.get('/schedules', scheduleController.findAll);
