@@ -28,6 +28,26 @@ exports.finById = function(req, res) {
     });
 };
 
+exports.filterDestination = function(req, res) {
+    Flight.filterDestination(req.params.value, function(err, flights) {
+        console.log('controller')
+        if (err)
+            res.status(400).send(err);
+        console.log('res', flights);
+        res.send(flights);
+    });
+};
+
+exports.filterOrigin = function(req, res) {
+    Flight.filterOrigin(req.params.value, function(err, flights) {
+        console.log('controller')
+        if (err)
+            res.status(400).send(err);
+        console.log('res', flights);
+        res.send(flights);
+    });
+};
+
 /**
  * 
  * @param {*} req 

@@ -39,6 +39,8 @@ router.get('/schedules/:id', scheduleController.finById);
 router.get('/flights', flightController.findAll);
 router.post('/flights', [authMiddleware.checkJwt], flightController.create);
 router.get('/flights/:id', flightController.finById);
+router.get('/flights/search/destination/:value', flightController.filterDestination);
+router.get('/flights/search/origin/:value', flightController.filterOrigin);
 
 
 module.exports = router

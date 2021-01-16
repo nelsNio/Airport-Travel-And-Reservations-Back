@@ -18,6 +18,44 @@ exports.findAll = (result) => {
         }
     });
 };
+
+exports.filterOrigin = (value, result) => {
+    const queryDB = "select f.idflight, origin.idcity as originId, origin.name  as originName," +
+        " destination.idcity  as destinationId, destination.name  as destinationName" +
+        " from flight f left join city origin" +
+        " on origin.idcity = f.origin_idcity" +
+        " left join  city destination on destination.idcity= f.destination_idcity " +
+        `where origin.name like  '%${value}%'`;
+    dbConn.query(queryDB, function(err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        } else {
+            console.log('flight : ', res);
+            result(null, res);
+        }
+    });
+};
+
+exports.filterDestination = (value, result) => {
+    const queryDB = "select f.idflight, origin.idcity as originId, origin.name  as originName," +
+        " destination.idcity  as destinationId, destination.name  as destinationName" +
+        " from flight f left join city origin" +
+        " on origin.idcity = f.origin_idcity" +
+        " left join  city destination on destination.idcity= f.destination_idcity " +
+        `where destination.name like  '%${value}%'`;
+    dbConn.query(queryDB, function(err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        } else {
+            console.log('flight : ', res);
+            result(null, res);
+        }
+    });
+};
+
+
 exports.finById = (id, result) => {
     dbConn.query("Select * from flight where idflight = ? ", id, function(err, res) {
         if (err) {
