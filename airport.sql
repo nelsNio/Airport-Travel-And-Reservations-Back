@@ -41,7 +41,7 @@ CREATE UNIQUE INDEX `document_UNIQUE` ON `myAirportDb`.`user` (`document` ASC) V
 DROP TABLE IF EXISTS `myAirportDb`.`city` ;
 
 CREATE TABLE IF NOT EXISTS `myAirportDb`.`city` (
-  `idcity` INT NOT NULL,
+  `idcity` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idcity`))
 ENGINE = InnoDB;
@@ -53,7 +53,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `myAirportDb`.`flight` ;
 
 CREATE TABLE IF NOT EXISTS `myAirportDb`.`flight` (
-  `idflight` INT NOT NULL,
+  `idflight` INT NOT NULL AUTO_INCREMENT,
   `origin_idcity` INT NOT NULL,
   `destination_idcity` INT NOT NULL,
   PRIMARY KEY (`idflight`, `origin_idcity`, `destination_idcity`),
@@ -80,7 +80,7 @@ CREATE INDEX `fk_flight_city2_idx` ON `myAirportDb`.`flight` (`destination_idcit
 DROP TABLE IF EXISTS `myAirportDb`.`booking` ;
 
 CREATE TABLE IF NOT EXISTS `myAirportDb`.`booking` (
-  `idbooking` INT NOT NULL,
+  `idbooking` INT NOT NULL AUTO_INCREMENT,
   `user_iduser` INT NOT NULL,
   `flight_idflight` INT NOT NULL,
   PRIMARY KEY (`idbooking`, `user_iduser`, `flight_idflight`),
@@ -107,7 +107,7 @@ CREATE INDEX `fk_booking_flight1_idx` ON `myAirportDb`.`booking` (`flight_idflig
 DROP TABLE IF EXISTS `myAirportDb`.`schedule` ;
 
 CREATE TABLE IF NOT EXISTS `myAirportDb`.`schedule` (
-  `idschedule` INT NOT NULL,
+  `idschedule` INT NOT NULL AUTO_INCREMENT,
   `date_schedule` DATETIME NOT NULL,
   PRIMARY KEY (`idschedule`))
 ENGINE = InnoDB;

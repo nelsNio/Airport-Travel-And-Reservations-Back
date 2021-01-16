@@ -5,6 +5,7 @@ const cityController = require('../controllers/cities.controllers');
 const userController = require('../controllers/users.controllers');
 const bookingController = require('../controllers/booking.controllers');
 const scheduleController = require('../controllers/schedule.controllers');
+const flightController = require('../controllers/flights.controllers');
 const loginController = require('../controllers/login.controllers');
 var authMiddleware = require('../middleware/auth');
 
@@ -33,6 +34,11 @@ router.get('/bookings/user/:id', bookingController.finByUser);
 router.get('/schedules', scheduleController.findAll);
 router.post('/schedules', [authMiddleware.checkJwt], scheduleController.create);
 router.get('/schedules/:id', scheduleController.finById);
+
+// Define API Flight
+router.get('/flights', flightController.findAll);
+router.post('/flights', [authMiddleware.checkJwt], flightController.create);
+router.get('/flights/:id', flightController.finById);
 
 
 module.exports = router
