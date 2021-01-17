@@ -4,6 +4,7 @@ const router = express.Router()
 const cityController = require('../controllers/cities.controllers');
 const userController = require('../controllers/users.controllers');
 const bookingController = require('../controllers/booking.controllers');
+const rateController = require('../controllers/rate.controllers');
 const scheduleController = require('../controllers/schedule.controllers');
 const flightController = require('../controllers/flights.controllers');
 const loginController = require('../controllers/login.controllers');
@@ -26,9 +27,15 @@ router.get('/users/:id', userController.finById);
 
 // Define API Bookings
 router.get('/bookings', bookingController.findAll);
-router.post('/bookings', [authMiddleware.checkJwt], bookingController.create);
+router.post('/bookings/:idrate', [authMiddleware.checkJwt], bookingController.create);
 router.get('/bookings/:id', bookingController.finById);
 router.get('/bookings/user/:id', bookingController.finByUser);
+
+// Define API Rate
+router.get('/rates', rateController.findAll);
+router.get('/rates/:id', rateController.finById);
+router.get('/rates/search/destination/:value', rateController.filterByDestination);
+router.get('/rates/search/origin/:value', rateController.filterByOrign);
 
 // Define API Schedule
 router.get('/schedules', scheduleController.findAll);

@@ -44,8 +44,10 @@ exports.finByUser = function(req, res) {
  * @param {*} res 
  */
 exports.create = function(req, res) {
-
+    console.log(req.user);
     //handles null error
+    req.body.user = req.user.iduser;
+    req.body.rate = req.params.idrate;
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
         res.status(400).send({ error: true, message: 'Please provide all required field' });
     } else {

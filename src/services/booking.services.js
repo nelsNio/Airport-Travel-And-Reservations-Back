@@ -41,14 +41,34 @@ exports.finByUser = (id, result) => {
 
 exports.create = function(newbooking, result) {
     const new_booking = new Booking(newbooking);
+    const queryCount = `select count(idbooking) bookings
+    from booking left join rate r on r.idrate = booking.rates_idrate
+    where user_iduser= ${new_booking.user_iduser} and r.idrate= ${new_booking.rates_idrate}`;
 
-    dbConn.query("INSERT INTO booking set ?", new_booking, function(err, res) {
+
+    dbConn.query(queryCount, function(err, res) {
         if (err) {
             console.log("error: ", err);
-            result(err, null);
+            result(err);
         } else {
-            console.log(res.insertId);
-            result(null, res.insertId);
+            if (res[0].bookings != 0) {
+                console.log('Maxmimo');
+                result({ ok: false, err: 'Al parecer ya tienes agendado un vuelo para la misma fecha' }, null);
+
+            } else {
+                dbConn.query("INSERT INTO booking set ?", new_booking, function(err, res) {
+                    if (err) {
+                        console.log("error: ", err);
+                        result(err, null);
+                    } else {
+                        console.log(res.insertId);
+                        result(null, res.insertId);
+                    }
+                });
+            }
+
         }
-    });
+
+    })
+
 };
