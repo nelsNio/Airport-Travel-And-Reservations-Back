@@ -20,7 +20,6 @@ exports.finById = (id, result) => {
             console.log("error: ", err);
             result(err);
         } else {
-            console.log('User encontrado :', res[0].email);
             console.log('user : ', res);
             result(null, res);
         }

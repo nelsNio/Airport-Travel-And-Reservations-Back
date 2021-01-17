@@ -24,6 +24,7 @@ router.get('/cities/:id', cityController.finById);
 router.get('/users', userController.findAll);
 router.post('/users', userController.create);
 router.get('/users/:id', userController.finById);
+router.get('/user/rates/', [authMiddleware.checkJwt], rateController.findAllByUser);
 
 // Define API Bookings
 router.get('/bookings', bookingController.findAll);
@@ -34,7 +35,9 @@ router.get('/bookings/user/:id', bookingController.finByUser);
 // Define API Rate
 router.get('/rates', rateController.findAll);
 router.get('/rates/:id', rateController.finById);
+router.get('/rates/user/search/destination/:value', [authMiddleware.checkJwt], rateController.fltByDestUser);
 router.get('/rates/search/destination/:value', rateController.filterByDestination);
+router.get('/rates/user/search/origin/:value', [authMiddleware.checkJwt], rateController.fltByOrignUser);
 router.get('/rates/search/origin/:value', rateController.filterByOrign);
 
 // Define API Schedule
