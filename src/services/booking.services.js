@@ -41,9 +41,11 @@ exports.finByUser = (id, result) => {
 
 exports.create = function(newbooking, result) {
     const new_booking = new Booking(newbooking);
-    const queryCount = `select count(idbooking) bookings
-    from booking left join rate r on r.idrate = booking.rates_idrate
-    where user_iduser= ${new_booking.user_iduser} and r.idrate= ${new_booking.rates_idrate}`;
+    const queryCount = `SELECT COUNT(*) bookings from booking b  join
+    rate r on r.idrate = b.rates_idrate
+    join schedule s on s.idschedule = r.schedule_idschedule
+    where s.idschedule=(select s.idschedule from rate r join schedule s on s.idschedule = r.schedule_idschedule
+    where r.idrate=${new_booking.rates_idrate}) and b.user_iduser= ${new_booking.user_iduser};`;
 
 
     dbConn.query(queryCount, function(err, res) {
